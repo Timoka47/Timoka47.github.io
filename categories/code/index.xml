@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on XY&#39;s Blog</title>
+    <link>https://gdy0924.github.io/categories/code/</link>
+    <description>Recent content in Code on XY&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://gdy0924.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SETR</title>
+      <link>https://gdy0924.github.io/posts/setrcode/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/setrcode/</guid>
+      <description>Decoder naive 1class SETR_Naive(SegmentationTransformer): 2 def __init__( 3 self, 4 img_dim, 5 patch_dim, 6 num_channels, 7 num_classes, 8 embedding_dim, 9 num_heads, 10 num_layers, 11 hidden_dim, 12 dropout_rate=0.0, 13 attn_dropout_rate=0.0, 14 conv_patch_representation=False, 15 positional_encoding_type=&amp;#34;learned&amp;#34;, 16 ): 17 super(SETR_Naive, self).__init__( 18 img_dim=img_dim, 19 patch_dim=patch_dim, 20 num_channels=num_channels, 21 embedding_dim=embedding_dim, 22 num_heads=num_heads, 23 num_layers=num_layers, 24 hidden_dim=hidden_dim, 25 dropout_rate=dropout_rate, 26 attn_dropout_rate=attn_dropout_rate, 27 conv_patch_representation=conv_patch_representation, 28 positional_encoding_type=positional_encoding_type, 29 ) 30 31 self.num_classes = num_classes 32 self._init_decode() 33 34 #两个（1×1卷积+BN+ReLU）+上采样 35 def _init_decode(self): 36 self.</description>
+    </item>
+    
+    <item>
+      <title>DeepLab系列</title>
+      <link>https://gdy0924.github.io/posts/deeplab%E7%B3%BB%E5%88%97code/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/deeplab%E7%B3%BB%E5%88%97code/</guid>
+      <description>V1 1import torch 2import torch.nn as nn 3import torch.nn.functional as F 4 5# 使用torch的nn模块中BatchNorm/在encoding文件中定义的BatchNorm 6try: 7 from encoding.nn import SyncBatchNorm 8 _BATCH_NORM = SyncBatchNorm 9except: 10 _BATCH_NORM = nn.BatchNorm2d 11_BOTTLENECK_EXPANSION = 4 12 13#卷积+BN+非线性激活 14class _ConvBnReLU(nn.Sequential): 15 BATCH_NORM = _BATCH_NORM 16 def __init__(self, in_ch, out_ch, kernel_size, stride, padding, dilation, relu=True): 17 super(_ConvBnReLU, self).__init__() 18 self.add_module( 19 &amp;#34;conv&amp;#34;,nn.Conv2d(in_ch, out_ch, kernel_size, stride, padding, dilation, bias=False), 20 ) 21 self.add_module(&amp;#34;bn&amp;#34;, _BATCH_NORM(out_ch, eps=1e-5, momentum=0.999)) 22 23 if relu: 24 self.</description>
+    </item>
+    
+    <item>
+      <title>U-Net</title>
+      <link>https://gdy0924.github.io/posts/u-netcode/</link>
+      <pubDate>Wed, 27 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/u-netcode/</guid>
+      <description>1import torch 2import torch.nn as nn 3import torch.nn.functional as F 4 5#下采样卷积block（3×3卷积+3×3卷积） 6class UNetConvBlock(nn.Module): 7 def __init__(self, in_chans, out_chans, padding, batch_norm): 8 super(UNetConvBlock, self).__init__() 9 block=[] 10 11 block.append(nn.Conv2d(in_chans, out_chans, kernel_size=3, padding=int(padding)) 12 block.append(nn.ReLU()) 13 14 if batch_norm : 15 block.append(nn.BatchNorm2d(out_chans)) 16 17 block.append(nn.Conv2d(out_chans, out_chans, kernel_size=3, padding=int(padding)) 18 block.append(nn.ReLU()) 19 20 if batch_norm: 21 block.append(nn.BatchNorm2d(out_chans)) 22 23 self.block = nn.Sequential(*block) 24 25 def forward(self, x): 26 out = self.block(x) 27 return out 28 29#上采样block 30class UNetUpBlock(nn.</description>
+    </item>
+    
+    <item>
+      <title>FCN</title>
+      <link>https://gdy0924.github.io/posts/fcncode/</link>
+      <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/fcncode/</guid>
+      <description>1class FCNs(nn.Module): 2 def __init__(self, num_classes, backbone=&amp;#34;vgg&amp;#34;): 3 super(FCNs, self).__init__() 4 self.num_classes = num_classes 5 #VGG为提取特征的网络 6 if backbone == &amp;#34;vgg&amp;#34;: 7 self.features = VGG() 8 #转置卷积(输入通道数，输出通道数，卷积核大小，步长，零填充将添加到输入中每个维度的两侧，在输出形状的每个尺寸的一侧添加的附加大小) 9 #每次上采样2倍，共上采样5次 10 # deconv1 1/16 11 self.deconv1 = nn.ConvTranspose2d(512, 512, kernel_size=3, stride=2, padding=1, output_padding=1) 12 self.bn1 = nn.BatchNorm2d(512) 13 self.relu1 = nn.ReLU() 14 15 # deconv1 1/8 16 self.deconv2 = nn.ConvTranspose2d(512, 256, kernel_size=3, stride=2, padding=1, output_padding=1) 17 self.bn2 = nn.BatchNorm2d(256) 18 self.relu2 = nn.</description>
+    </item>
+    
+    <item>
+      <title>GoogleNet</title>
+      <link>https://gdy0924.github.io/posts/googlenetcode/</link>
+      <pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/googlenetcode/</guid>
+      <description>GoogLeNet获得了2014年ILSVRC比赛分类任务的冠军，其利用Inception模块，在加深网络深度的同时，减少了参数量，从而减少计算资源的利用。
+实现 基于pytorch实现的代码如下：
+1import torch 2import torch.nn as nn 3import torch.nn.functional as F 4 5#卷积+BN+ReLu 6class BasicConv2d(nn.Module): 7 def __init__(self, in_channels, out_channals, **kwargs): 8 super(BasicConv2d, self).__init__() 9 self.conv = nn.Conv2d(in_channels, out_channals, **kwargs) 10 self.bn = nn.BatchNorm2d(out_channals) 11 12 def forward(self, x): 13 x = self.conv(x) 14 x = self.bn(x) 15 return F.relu(x) 16 17# Inception模块 18class Inception(nn.Module): 19 #（输入通道数，1×1卷积的输出通道数，3×3卷积的降维通道数，3×3卷积的输出通道数， 20 #5×5卷积的降维通道数，5×5卷积的输出通道数，池化通道数） 21 def __init__(self, in_planes,n1x1, n3x3red, n3x3, n5x5red, n5x5, pool_planes): 22 super(Inception, self).</description>
+    </item>
+    
+    <item>
+      <title>VGG</title>
+      <link>https://gdy0924.github.io/posts/vggcode/</link>
+      <pubDate>Tue, 29 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/vggcode/</guid>
+      <description>VGG
+实现 基于pytorch实现的代码如下：
+1import torch.nn as nn 2import torch.nn.functional as F 3from torchsummary import summary 4 5class VGG(nn.Module): 6 &amp;#34;&amp;#34;&amp;#34; 7VGG builder 8&amp;#34;&amp;#34;&amp;#34; 9 def __init__(self, arch: object, num_classes=1000) -&amp;gt; object: 10 super(VGG, self).__init__() 11 self.in_channels = 3 12 self.conv3_64 = self.__make_layer(64, arch[0]) 13 self.conv3_128 = self.__make_layer(128, arch[1]) 14 self.conv3_256 = self.__make_layer(256, arch[2]) 15 self.conv3_512a = self.__make_layer(512, arch[3]) 16 self.conv3_512b = self.__make_layer(512, arch[4]) 17 self.fc1 = nn.Linear(7*7*512, 4096) 18 self.bn1 = nn.</description>
+    </item>
+    
+    <item>
+      <title>AlexNet</title>
+      <link>https://gdy0924.github.io/posts/alexnetcode/</link>
+      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/alexnetcode/</guid>
+      <description>AlexNet在在2012年的ImageNet竞赛中取得了冠军，作为第一个深度卷积网络在该比赛中获得如此好的成绩，AlexNet证实了深度卷积网络的潜力，并引起了研究者们的极大热情。 AlexNet共包含8层，其中前5层为卷积层，后三层为全连接层，最后一个全连接层的输出是1000维，输入softmax产生最终的输出：1000类的标签分布。
+实现 基于pytorch实现的代码如下：
+1 2import torch 3from torch import nn 4from d2l import torch as d2l 5 6net = nn.Sequential( 7 nn.Conv2d(1,96,kernel_size=11,stride=4,padding=1),nn.ReLU(), 8 nn.MaxPool2d(kernel_size=3,stride=2), 9 nn.Conv2d(96,256,kernel_size=5,padding=2),nn.ReLU(), 10 nn.MaxPool2d(kernel_size=3,stride=2), 11 nn.Conv2d(256,384,kernel_size=3,padding=1),nn.ReLU(), 12 nn.Conv2d(384,384,kernel_size=3,padding=1),nn.ReLU(), 13 nn.Conv2d(384,256,kernel_size=3,padding=1),nn.ReLU(), 14 nn.MaxPool2d(kernel_size=3,stride=2),nn.Flatten(), 15 nn.Linear(6400,4096),nn.ReLU(),nn.Dropout(p=0.5), 16 nn.Linear(4096,4096),nn.ReLU(),nn.Dropout(p=0.5), 17 nn.Linear(4096,10)) 18 19X = torch.randn(1,1,224,224) 20for layer in net: 21 X=layer(X) 22 print(layer.__class__.__name__,&amp;#39;output shape:\t&amp;#39;,X.shape) 23 24batch_size=128 25train_iter,test_iter = d2l.load_data_fashion_mnist(batch_size,resize=224) 26 27def evaluate_accuracy_gpu(net,data_iter,device=None): 28 if isinstance(net, nn.Module): 29 net.eval() 30 if not device: 31 device = next(iter(net.</description>
+    </item>
+    
+    <item>
+      <title>LeNet</title>
+      <link>https://gdy0924.github.io/posts/lenetcode/</link>
+      <pubDate>Sun, 26 Dec 2021 20:58:21 +0800</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/lenetcode/</guid>
+      <description>LeNet是很简单的一个经典卷积神经网络，主要用于手写数字识别，所以是一个多分类任务，并且是十个类别。
+实现 基于pytorch实现的代码如下：
+1 2import torch 3from torch import nn 4from d2l import torch as d2l 5 6class Reshape(torch.nn.Module): 7 def forward(self,x): 8 return x.view(-1,1,28,28) 9 10net = torch.nn.Sequential( 11 Reshape(),nn.Conv2d(1,6,kernel_size=5,padding=2),nn.Sigmoid(), 12 nn.AvgPool2d(kernel_size=2,stride=2), 13 nn.Conv2d(6,16,kernel_size=5),nn.Sigmoid(), 14 nn.AvgPool2d(kernel_size=2,stride=2),nn.Flatten(), 15 nn.Linear(16*5*5,120),nn.Sigmoid(), 16 nn.Linear(120,84),nn.Sigmoid(), 17 nn.Linear(84,10)) 18 19X = torch.rand(size=(1,1,28,28),dtype=torch.float32) 20for layer in net: 21 X = layer(X) 22 print(layer.__class__.__name__,&amp;#39;output shape：\t&amp;#39;,X.shape) 23 24batch_size=256 25train_iter,test_iter = d2l.load_data_fashion_mnist(batch_size=batch_size) 26 27def evaluate_accuracy_gpu(net,data_iter,device=None): 28 if isinstance(net, nn.Module): 29 net.</description>
+    </item>
+    
+  </channel>
+</rss>

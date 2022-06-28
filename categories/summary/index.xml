@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Summary on XY&#39;s Blog</title>
+    <link>https://gdy0924.github.io/categories/summary/</link>
+    <description>Recent content in Summary on XY&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://gdy0924.github.io/categories/summary/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>总结（一）</title>
+      <link>https://gdy0924.github.io/posts/%E6%80%BB%E7%BB%93%E4%B8%80/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/%E6%80%BB%E7%BB%93%E4%B8%80/</guid>
+      <description>简单点总结 图像分类 AlexNet：ReLU；Dropout。
+VGG：堆叠的小卷积增大感受野，代替大卷积核（加深网络）；全卷积网络（输入任意尺寸的图像）。
+GoogleNet：Inception模块（融合不同尺度的特征）；辅助分类器（解决更深网络中的梯度回传问题）。
+ResNet：残差网络；shortcut连接。（极大的增加网络深度）
+ResNeXt：split-transform-merge思想；将分组卷积引入ResNet（减少计算量）。
+ShuffleNet：分组卷积（减少计算量与内存使用量）；channel shuffle操作。
+目标检测 R-CNN：two-stage；Selective Search；多次卷积；SVM+regression。
+Fast R-CNN：two-stage；Selective Search；一次卷积；softmax+regression。
+Faster R-CNN：two-stage；RNP网络（解决Selective Search算法时间长问题）；RPN与特征提取共享卷积层；引入anchor（一个中心点9个锚框）；softmax+regression。
+YOLO：one-stage；全卷积网络；图像分为S×S的网格，一个网格预测两个bounding-box和一个对象类别；最终的通道数对应每个网格要预测的所有数值。
+SSD：one-stage；全卷积网络；default box（anchor思想，一个中心点5个锚框，解决YOLO一个网格只能预测一个对象的问题）；多尺度融合，即每种分辨率大小的特征图都经过一个detector后融合。
+图像分割 FCN：全卷积网络；转置卷积提高分辨率；融合不同分辨率的特征（add）。
+SegNet：全卷积网络；反池化+卷积操作提高分辨率（相比转置卷积减少内存使用与计算量）。
+U-Net：encoder-decoder架构；转置卷积提高分辨率；skip连接融合特征（concat）。
+Attention U-Net：在U-Net的基础上，引入attention gate（突出重点区域）。
+DeepLab：空洞卷积（扩大感受野但不降低分辨率）；空间金字塔池架构（融合不同尺度的特征）；在v3+中加入一个decoder，融合浅层特征，形成encoder-decoder架构。
+SETR：encoder-decoder结构；用transformer中的encoder提取特征，patch embedding+位置 embedding（相比CNN，感受野更大，捕获更全局的信息）；提出三种不同的decoder提高分辨率（线性插值）。
+SegFormer：encoder-decoder结构；修改SETR结构；Overlapped Patch Merging（overlap保留局部特征，patch merging在每个stage生成分辨率不同的特征）；Efficient Self-Attention（减少自注意力模块中的计算量与参数量）；Mix-FFN添加一个卷积层（引入相对位置信息，取消位置embedding）；完全基于MLP的decoder（计算简单）。
+图像分类 LeNet AlexNet 1、使用ReLU非线性激活：缓解梯度消失问题；
+2、多GPU训练：放在2个GPU上进行训练，在特定的层进行通信交流；
+3、LRN：局部响应标准化(Local Response Normalization)；
+4、Overlapping Pooling：池化窗口大小和步长不同，缓解过拟合问题；
+5、Dropout：随机的丢弃一些神经元，以防止过拟合。
+VGG 1、堆叠的小卷积代替大卷积：两个3×3大小的感受野堆叠起来的感受野与一个5×5大小的感受野相同，三个3×3大小的感受野堆叠起来的感受野与一个7×7大小的感受野相同。用小卷积多次引入非线性变换，并且减少网络参数。（使网络更深）
+2、全卷积网络：将最后的全连接层换成卷积层，可以输入任意尺寸大小的图片。
+GoogleNet 提出Inception结构：保持网络结构的稀疏性，又能利用密集矩阵的高计算性能。通过不同分支融合不同尺度的特征，1×1卷积实现通道数的减少。
+辅助分类器：解决梯度回传的问题，额外添加两个辅助的softmax用于向前传导梯度。
+后续改进：堆叠小卷积代替大卷积，加入BN，残差连接。
+ResNet  当更深层次的网络能够开始收敛时，出现网络退化的问题，即随着网络深度的增加，精度达到饱和，然后迅速下降。
+提出Residual Block：（如果增加的层可以构造成恒等映射，那么更深的模型的训练误差应该不大于对应较浅的模型）引入Shortcut连接，即$y=F(x)+x$，左边是网络层数较少时使用（18，34），右边用于更深的网络（50，101，152）；1×1卷积实现通道数的改变，降维减少计算量；add需要保证特征维度相同，使用1×1卷积实现Shortcut路径上特征尺寸和通道数的改变。 ResNeXt  在Residual Block中引入Inception Block的思想（split-transform-merge），即将输入的特征split，然后进行卷积操作，最后在merge合并（分组卷积的思想）： ShuffleNet  轻量级网络，通过改进深度可分离卷积，降低计算量与参数量。
+ResNeXt中，在分组卷积之后会跟着1×1的卷积，来融合不同通道的信息（深度可分离卷积也是同样），此时的1×1卷积相对来说计算量比较大，因此也考虑使用分组卷积。但是连续使用分组卷积会导致各组之间没有信息融合，因此引入channel shuffle操作。下图中a是连续使用几次分组卷积的结果，b表示将上一层中每个组中的通道划分为几个子组，然后向下一层中的每个组提供不同的子组，c为channel shuffle操作。 ShuffleNet Block：引入残差连接和深度可分离卷积思想（a）；将1×1卷积替换为分组卷积并引入channel shuffle操作（b）；通道拼接代替元素相加，进一步减少计算量（c）。 目标检测  目标检测方法主要分为两类：two-stage和one-stage。two-stage是先由算法生成一系列作为样本的候选框，再通过卷积神经网络进行样本分类，在检测准确率和定位精度上占优，如R-CNN系列；ne-stage则不用产生候选框，直接将目标边框定位的问题转化为回归问题处理，在算法速度上占优，如YOLO，SSD等。</description>
+    </item>
+    
+    <item>
+      <title>空洞卷积</title>
+      <link>https://gdy0924.github.io/posts/%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/</guid>
+      <description>原文链接：MULTI-SCALE CONTEXT AGGREGATION BY DILATED CONVOLUTIONS
+参考链接：如何理解空洞卷积（dilated convolution）？
+吃透空洞卷积(Dilated Convolutions)
+Dilated Convolution  空洞卷积（膨胀卷积/扩张卷积），最初的提出是为了解决图像分割的问题，常见的图像分割算法通常使用池化层和卷积层来增加感受野(Receptive Filed)，对图像进行特征提取，同时也缩小了特征图尺寸，然后再利用上采样还原图像尺寸，特征图缩小再放大的过程造成了精度上的损失。因此需要一种操作可以在增加感受野的同时保持特征图的尺寸不变，从而代替下采样和上采样操作。
+在VGG网络中，提出了关键一点：1个 7 x 7 的卷积层的正则等效于 3 个 3 x 3 的卷积层的叠加，而利用卷积的叠加可以大幅度的减少参数，有正则化的效果，参数少了就没那么容易发生过拟合。这也是现在绝大部分基于卷积的深层网络都在用小卷积核的原因，常常使用3 x 3的卷积核。
+神经元感受野的值越大表示其能接触到的原始图像范围就越大，也意味着它可能蕴含更为全局，语义层次更高的特征。在deep net中为了增加感受野且降低计算量，总要进行降采样(pooling或s2/conv)，这样虽然可以增加感受野，但空间分辨率降低了。为了能不丢失分辨率，且仍然扩大感受野，可以使用空洞卷积，即在卷积核中添加间距。
+空洞卷积引入了一个称为 “扩张率(dilation rate)”的超参数(hyper-parameter)，该参数定义了卷积核处理数据时各值的间距。因此，当设置不同dilation rate时，感受野就会不一样，也即获取了多尺度信息。
+如下图所示，其中：（a）为3x3大小的1-dilated conv，与普通的卷积操作一样；（b）为3x3的2-dilated conv，实际的卷积核大小还是3x3，但是空洞为1，也就是对应一个7x7的图像patch，只有9个红色的点和3x3的kernel发生卷积操作，其余的点略过，也可以理解为卷积核的大小为7x7，但是只有图中的9个点的权重不为0，其余都为0；（c）为4-dilated conv操作。 空洞卷积的好处是不做pooling损失信息的情况下，加大了感受野，让每个卷积输出都包含较大范围的信息。在图像需要全局信息或者语音文本需要较长的sequence信息依赖的问题中，都能很好的应用dilated conv。
+相比于上采样和池化层，主要缺点有：内部数据结构丢失；空间层级化信息丢失；小物体信息无法重建（假设有四个pooling layer 则 任何小于 2^4 = 16 pixel 的物体信息将理论上无法重建），而空洞卷积都可以避免上述问题。
+潜在的问题 The Gridding Effect  如果仅仅多次叠加 dilation rate为2 的 3 x 3 kernel 的话，则会出现这个问题： 从上图可以看出 kernel 并不连续，也就是并不是所有的 pixel 都用来计算了，因此这里将信息看做棋盘格（checker-board）的方式会损失信息的连续性，这对 pixel-level dense prediction 的任务来说是致命的。</description>
+    </item>
+    
+    <item>
+      <title>Upsampling</title>
+      <link>https://gdy0924.github.io/posts/upsampling/</link>
+      <pubDate>Tue, 26 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/upsampling/</guid>
+      <description>参考链接：上采样的几种方法
+图像语义分割中，编码器通过卷积层得到图像的一些特征，但是解码器需要将该特征还原到原图像的尺寸大小，才可以对原图像的每个像素点进行分类。从一个较小尺寸的矩阵进行变换，得到较大尺寸的矩阵，在这个过程就是上采样。
+插值法  插值法不需要学习任何的参数，只是根据已知的像素点对未知的点进行预测估计，从而可以扩大图像的尺寸，达到上采样的效果。
+转置卷积（反卷积） 参考链接：47 转置卷积【动手学深度学习v2】 抽丝剥茧，带你理解转置卷积（反卷积） 原始卷积  直观的理解就是固定大小的卷积核在原始的输入图像进行滑动，通过矩阵加权计算得到输出特征，如下图所示： 但是实际在计算机中计算的时候，并不是像这样一个位置一个位置的进行滑动计算，因为这样的效率太低了。计算机会将卷积核转换成等效的矩阵，将输入转换为向量。通过输入向量和卷积核矩阵的相乘获得输出向量。输出的向量经过整形便可得到我们的二维输出特征。具体的操作如下图所示，由于我们的3x3卷积核要在输入上不同的位置卷积4次，所以通过补零的方法将卷积核分别置于一个4x4矩阵的四个角落。这样我们的输入可以直接和这四个4x4的矩阵进行卷积，而舍去了滑动这一操作步骤。 进一步，将输入拉成长向量，四个4x4卷积核也拉成长向量并进行拼接，如下图所示： 记向量化的图像为$I$，向量化的卷积矩阵为$C$，输出特征向量为$O$，则有： $$ I^{T}×C=O^{T} $$ 上述过程将一个$1×16$的行向量乘以$16×4$的矩阵，得到了$1×4$的行向量。那么反过来将一个$1×4$的向量乘以一个$4×16$的矩阵应该就能得到一个$1×16$的行向量，这就是转置卷积的思想。
+转置卷积  对应上面公式，我们有转置卷积的公式： $$ O^{T}×C^{T}=I^{T} $$ 需要注意的是这两个操作并不是可逆的，对于同一个卷积核，经过转置卷积操作之后并不能恢复到原始的数值，保留的只有原始的形状。
+代码 1import tensorflow as tf 2 3x = tf.reshape(tf.constant([[1,2], 4 [4,5]],dtype=tf.float32), [1, 2, 2, 1]) 5kernel = tf.reshape(tf.constant([[1,2,3], 6 [4,5,6], 7 [7,8,9]],dtype=tf.float32), [3, 3, 1, 1]) 8transpose_conv = tf.nn.conv2d_transpose(x, kernel, output_shape=[1, 4, 4, 1], strides=[1,1,1,1], padding=&amp;#39;VALID&amp;#39;) 9sess = tf.Session() 10print(sess.run(x)) 11print(sess.run(kernel)) 12print(sess.run(transpose_conv)) 示例  当padding=0，stride=1时，具体例子计算如下：  在原始的卷积操作中，加入padding，会使输出比无填充时尺寸更大，相反，在转置卷积中，加入padding会使输出更小，如下图所示（具体来说，就是在计算完成得到输出后，padding为多少，就把输出结果的几圈去掉）：  在原始的卷积操作中，加入stride，会使输出比无填充时尺寸更小，相反，在转置卷积中，加入stride会使输出更大，如下图所示（stride对应的为补0操作，并且是在内部行列之间进行补0）： 反池化（UnPooling）  max pooling的逆操作，即在max pool的时候记录一个池化的索引，就是记录取得的这个值是在哪个位置。在反池化的时候，输入的值根据索引放回原来的位置，其余位置填0，如下图所示： </description>
+    </item>
+    
+    <item>
+      <title>Transformer中的位置编码</title>
+      <link>https://gdy0924.github.io/posts/transformer%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81/</link>
+      <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/transformer%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81/</guid>
+      <description>位置编码 参考链接：如何理解Transformer论文中的positional encoding，和三角函数有什么关系？
+首先，给定一个长为$T$的文本，最简单的位置编码就是计数，即使用$PE=pos=0,1,2,&amp;hellip;,T-1$作为文本中每个字的位置编码，但是这个方法缺点很明显，这个序列是没有上界的。当有一个很长的文本，那么最后一个字的位置编码会比第一个字大太多，肯定会对模型有干扰。
+其次，我们希望编码有一个范围，那么就可以想到使用文本长度对每个位置作归一化，得到$PE=\frac{pos}{T-1}$。这样固然使得所有位置编码都落入$[0,1]$区间，但是问题也是显著的：不同长度文本的位置编码步长是不同的，在较短的文本中紧紧相邻的两个字的位置编码差异，会和长文本中相邻数个字的两个字的位置编码差异一致。
+最后，对于位置编码应该满足：体现同一个单词在不同位置的区别；体现一定的先后次序关系（相对位置），并且在一定范围内的编码差异不应该依赖于文本长度，具有一定不变性。一种思路是使用有界的周期性函数。在前面的两种做法里面，我们为了体现某个字在句子中的绝对位置，使用了一个单调的函数，使得任意后续的字符的位置编码都大于前面的字，如果我们放弃对绝对位置的追求，转而要求位置编码仅仅关注一定范围内的相对次序关系，那么有界的周期性函数就是很好的选择。
+为什么选择三角函数 参考链接：浅谈 Transformer-based 模型中的位置表示
+什么？是Transformer位置编码
+位置编码可以分为绝对位置编码和相对位置编码，绝对位置对句子语义的影响不大，而相对位置比较重要。
+Transformer 中使用 Positional Encoding 生成固定的位置表示： $$ PE(pos,2i)=sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}}) $$ $$ PE(pos,2i+1)=cos(\frac{pos}{10000^{\frac{2i}{d_{model}}}}) $$ 其中，$pos$为token的位置，$pos=0,1,2,&amp;hellip;,L$，$i$为向量的某一维度，当$d_{model}=512$时，$i=0,1,2,&amp;hellip;,255$。
+选择sin函数与cos函数，是因为其有以下特点： $$ sin(\alpha +\beta )=sin\alpha cos\beta +cos\alpha sin\beta $$ $$ cos(\alpha +\beta )=cos\alpha cos\beta -sin\alpha sin\beta $$ 由于上述公式，可以将$PE_{pos+k}$表示为$PE_{pos}$的线性组合，即： $$ PE(pos+k,2i)=sin(\frac{pos+k}{10000^{\frac{2i}{d_{model}}}}) $$ $$ =sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})cos(\frac{k}{10000^{\frac{2i}{d_{model}}}})+cos(\frac{pos}{10000^{\frac{2i}{d_{model}}}})sin(\frac{k}{10000^{\frac{2i}{d_{model}}}}) $$ $$ =PE(pos,2i)\times PE(k,2i+1)+PE(pos,2i+1)\times PE(k,2i) $$ $$ PE(pos+k,2i+1)=cos(\frac{pos+k}{10000^{\frac{2i}{d_{model}}}}) $$ $$ =cos(\frac{pos}{10000^{\frac{2i}{d_{model}}}})cos(\frac{k}{10000^{\frac{2i}{d_{model}}}})-sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})sin(\frac{k}{10000^{\frac{2i}{d_{model}}}}) $$ $$ =PE(pos,2i+1)\times PE(k,2i+1)-PE(pos,2i)\times PE(k,2i) $$ 借助上述绝对位置的编码公式，可以模型能够学习到相对位置信息。也就是说，如果将$PE_{pos}$和$PE_{pos+k}$相乘，可以得到： $$ PE_{pos}\cdot PE_{pos+k}=\sum_{i=0}^{\frac{d_{model}}{2}-1}sin(w_{i}pos)sin(w_{i}(pos+k))+cos(w_{i}pos)cos(w_{i}(pos+k)) $$ $$ =\sum_{i=0}^{\frac{d_{model}}{2}-1}cos(w_{i}(pos-(pos+k))) $$ $$ =\sum_{i=0}^{\frac{d_{model}}{2}-1}cos(w_{i}k) $$ 其中，$w_{i}=\frac{1}{10000^{\frac{2i}{d_{model}}}}$，从最后结果可以看出，唯一影响结果的就是$k$，并且，如果两个token的距离越大，也就是$k$越大，根据余弦函数的性质可以知道，两个位置的相乘结果越小。这样可以得到，如果两个token距离越远则乘积的结果越小。</description>
+    </item>
+    
+    <item>
+      <title>图像分割经典论文总结</title>
+      <link>https://gdy0924.github.io/posts/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Mon, 25 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/</guid>
+      <description>参考链接：超像素、语义分割、实例分割、全景分割 傻傻分不清？
+分类 superpixels（超像素）  超像素是一系列像素的集合，这些像素具有类似的颜色、纹理等特征，距离也比较近。用超像素对一张图片进行分割的结果见下图，其中每个白色线条区域内的像素集合就是一个超像素。需要注意的是，超像素很可能把同一个物体的不同部分分成多个超像素。 Semantic Segmentation（语义分割）  语义分割还就是把图像中每个像素赋予一个类别标签（比如汽车、建筑、地面、天空等），如下图所示，把图像分为了草地（浅绿）、人（红色）、树木（深绿）、天空（蓝色）等标签，用不同的颜色来表示。但是该方式存在一些问题，比如如果一个像素被标记为红色，那就代表这个像素所在的位置是一个人，但是如果有两个都是红色的像素，这种方式无法判断它们是属于同一个人还是不同的人，即语义分割只能判断类别，无法区分个体。 Instance Segmentation（实例分割）  实例分割有点类似于物体检测，不过物体检测一般输出的是 bounding box，而实例分割输出的是一个mask。实例分割和语义分割也不同，它不需要对每个像素进行标记，它只需要找到感兴趣物体的边缘轮廓就行，比如下图中的人就是感兴趣的物体。该图的分割方法采用了一种称为Mask R-CNN的方法。我们可以看到每个人都是不同的颜色的轮廓，因此我们可以区分出单个个体。 Panoptic Segmentation（全景分割）  全景分割是语义分割和实例分割的结合。如下图所示，每个像素都被分为一类，如果一种类别里有多个实例，会用不同的颜色进行区分，我们可以知道哪个像素属于哪个类中的哪个实例。比如下图中黄色和红色都属于人这一个类别里，但是分别属于不同的实例（人），因此我们可以通过mask的颜色很容易分辨出不同的实例。 经典网络 语义分割： FCN：Fully Convolution Networks
+U-NET：U-Net: Convolutional Networks for Biomedical Image Segmentation
+SegNet：A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation
+PSPNet：PSPNet: Pyramid Scene Parsing Network
+DeepLab：
+v1：Semantic Image Segmentation with deep convolutional nets and fully connected CRFs
+v2：DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs</description>
+    </item>
+    
+    <item>
+      <title>R-CNN系列简单总结</title>
+      <link>https://gdy0924.github.io/posts/r-cnn%E7%B3%BB%E5%88%97%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/r-cnn%E7%B3%BB%E5%88%97%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</guid>
+      <description>参考链接：RCNN, Fast R-CNN 与 Faster RCNN理解及改进方法
+R-CNN 包含三个步骤：
+（1）候选区域选择：使用基于启发式的区域提取方法，用的方法是Selective Search，即从小区域开始，逐步合并两个最相关的相邻区域，重复此步骤，直到图像合并为一个区域，最后输出候选区域；
+（2）CNN特征提取：将region proposal 缩放至统一大小，作为输入进行特征提取；
+（3）分类与边界回归：将得到的特征向量送进每一类的SVM进行分类, 如果有十个类别，那么每个region proposal要跑10个SVM，得到类别；同时将特征向量做回归（左上角右下角的四个坐标），修正region proposal的位置（在这一步中包括NMS操作，用于去除掉同一类别中重复的box）
+Fast R-CNN 包含四个步骤：
+（1）对原始图片使用selective search算法得到约2k个region proposals（与R-CNN第一步相同）；
+（2）将任意size的图片输入CNN，得到特征图，只做一次卷积，相比于R-CNN，每个region proposal都要经过一次卷积，大大减少了时间；
+（3）在特征图中找到每一个region proposals对应的特征框，使用RoI池化层将每个特征框池化到统一大小；
+（4）统一大小的特征框经过全连接层得到固定大小的特征向量，分别进行softmax分类（使用softmax代替了R-CNN里面的多个SVM分类器）和bbox回归。
+RoI pooling层  RoI池化层用来将region proposals对应的特征框池化成统一大小，具体来说就是：将$h×w$大小的RoI特征框，划分成近似$h/H×w/W$大小的子窗口，形成$H×W$网格，将每个子窗口中的最大值输出到相应的网格单元中，如下图所示：是将一个$5×7$大小的region proposals，经过RoI pooling得到固定大小$2×2$的特征向量。 Faster R-CNN 参考链接： 提出一个RPN网络来代替之前的selective search操作，即利用网络来生成候选框，大大提高了效率，其包含四个步骤：
+（1）提取特征：输入固定大小的图片，进过卷积层提取特征图feature map；
+（2）生成region proposals: 经过Region Proposal Networks(RPN)网络生成region proposals，接着通过softmax判断anchors属于foreground还是background，再利用bounding box 回归修正anchors获得精确的proposals（候选区域）；
+（3）ROI Pooling: 该层的输入是feature maps和proposals，综合这些信息后提取proposal feature maps；
+（4）Classification: 将Roi pooling生成的proposal feature maps分别传入softmax分类和bounding box regression获得检测物体类别和检测框最终的精确位置。 因此，在训练Faster R-CNN的时候有四个损失：RPN 分类损失：anchor是否为前景（二分类）；RPN位置回归损失：anchor位置微调；RoI 分类损失：RoI所属类别（K+1类）；RoI位置回归损失：继续对RoI位置微调。四个损失相加作为最后的损失，反向传播，更新参数。
+RPN  上述图片的下边部分的两个分支，就是RPN网络，上面分支通过softmax分类anchors获得positive和negative分类，下面分支用于计算对于anchors的bounding box regression偏移量，以获得精确的proposal。而最后的Proposal层则负责综合positive anchors和对应bounding box regression偏移量获取proposals，同时剔除太小和超出边界的proposals。（其实RPN网络就相当于一个小型的目标检测网络）</description>
+    </item>
+    
+    <item>
+      <title>IoU&amp;NMS</title>
+      <link>https://gdy0924.github.io/posts/iounms/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/iounms/</guid>
+      <description>IoU  IoU的全称为交并比（Intersection over Union），即 “预测的边框” 和 “真实的边框” 的交集和并集的比值，如下图所示： NMS 参考链接：NMS
+非极大值抑制（Non-Maximum suppression，NMS）用于消除同一个物体上的冗余预测框。
+传统NMS  其主要思想是：先对网络预测出的所有边界框按照分数由高到低排序，然后选取分数最高的预测框作为target，分别计算target与其余剩下预测框的重叠程度（用IoU来衡量），若重叠程度大于某一预先设定的阈值，则认为该预测框与target是同时负责预测同一个物体的，所以将该边界框删除，否则予以保留。接着在未被删除的预测框中选择分数最高的预测框作为新target，重复以上过程，直至判断出所有的框是否应该删除。 Soft-NMS  在传统NMS中，对于$IoU\geq NMS$阈值的相邻框，其做法是将其得分暴力置0。这对于有遮挡的情况十分不友好。因此Soft-NMS的做法是采取得分惩罚机制，使用一个与IoU正相关的惩罚函数对得分$s$进行惩罚： 其中，$M$代表当前的最大得分框。</description>
+    </item>
+    
+    <item>
+      <title>Attention&amp;Self-Attention</title>
+      <link>https://gdy0924.github.io/posts/attentionself-attention/</link>
+      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/attentionself-attention/</guid>
+      <description>参考连接：
+注意力机制
+大白话浅谈【注意力机制】
+注意力机制（Attention）
+(强推)李宏毅2021/2022春机器学习课程
+Encoder-Decoder 框架  下图是一个Encoder-Decoder 框架的例子，对应任务是机器翻译。 对于句子对&amp;lt;source，target&amp;gt;，将给定输入句子source，通过Encoder-Decoder框架生成目标句子target。其中，source和target都是一组单词序列： $$ source=\left \langle x_{1},x_{2},&amp;hellip;,x_{m} \right \rangle $$ $$ target=\left \langle y_{1},y_{2},&amp;hellip;,y_{n} \right \rangle $$ Encoder是对source进行编码，转换成中间语义$C$： $$ C=F(x_{1},x_{2},&amp;hellip;,x_{m}) $$ 对于解码器Decoder，其任务是根据中间语义C和当前已经生成的历史信息来生成下一时刻要生成的单词： $$ y_{i}=G(C,y_{1},y_{2},&amp;hellip;,y_{i-1}) $$ 具体来说，就是： $$ y_{1}=G(C) $$ $$ y_{2}=G(C,y_{1}) $$ $$ y_{3}=G(C,y_{1},y_{2}) $$ 从上述公式可以看出，对于每个输出$y$对应的都是相同的语义编码$C$，而$C$是对所有输入$x$“平等对待”所求得的，因此，对于target中的任何一个单词，source中任意单词对某个目标单词$y$来说影响力都是相同的。
+注意力机制  Attention是从大量信息中筛选出少量重要信息，并聚焦到这些重要信息上，忽略大多不重要的信息。权重越大越聚焦于其对应的Value值上，即权值代表了信息的重要性，而Value是其对应的信息。(可以说Key和Value是一样的东西)
+理解  引入注意力机制之后，上述框架图就变成了下边这样： 即对于每一个输出$y_{i}$都有其对应的自己的语义编码信息$C_{i}$，那么这个不同的$C_{i}$就代表了对输出$x$的不同“注意力”，如下公式所示： $$ C_{1}=F(\alpha_{11}x_{1},\alpha_{12}x_{2},&amp;hellip;,\alpha_{1m}x_{m}) $$ 公式中的$\alpha$就体现了对不同输入$x$的权重，生成target的过程就变成了： $$ y_1=G(C_1) $$ $$ y_{2}=G(C_{2},y_{1}) $$ $$ y_{3}=G(C_{3},y_{1},y_{2}) $$
+具体计算  Attention机制涉及到三个矩阵：$K$、$Q$、$V$，对这三个矩阵通俗的理解就是：图书馆（source）里有很多书（value），为了方便查找，我们给书做了编号（key）。当我们想要了解漫威（query）的时候，我们就可以看看那些动漫、电影、甚至二战相关的书籍。（$Q$是decoder的输出）
+其计算流程图如下所示： 共包含三个步骤：
+（1）根据Query和Key计算二者的相似度，得到注意力得分$s_{i}$，常见的方法包括：求两者的向量点积、求两者的向量cosine相似性或者引入额外的神经网络来求值等；</description>
+    </item>
+    
+    <item>
+      <title>分组卷积&amp;可分离卷积</title>
+      <link>https://gdy0924.github.io/posts/%E5%88%86%E7%BB%84%E5%8D%B7%E7%A7%AF%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF/</link>
+      <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/%E5%88%86%E7%BB%84%E5%8D%B7%E7%A7%AF%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF/</guid>
+      <description>分组卷积（Group Convolution）  标准的卷积如下图的上部分所示，则其参数量为：$(KernelSize\times KernelSize\times c_{1})\times c_{2}$；括号中表示一个卷积核所包含的数目，括号外表示需要的卷积核个数。
+分组卷积如下图的下半部分所示，将输入特征图按照通道数分成$g$组，则其参数量为：一组卷积操作所需的参数量×组数=（一组卷积操作所需的参数量）×$g$=（一组卷积中卷积核的个数×卷积核的参数）×$g$=$(\frac{c_{2}}{g}\times (KernelSize\times KernelSize\times \frac{c_{1}}{g}))×g$=$(KernelSize\times KernelSize\times c_{1})\times c_{2}\times \frac{1}{g}$。
+因此，分组卷积的参数量是标准卷积的$\frac{1}{g}$。 可分离卷积 空间可分离卷积（Spatially Separable Convolutions）  将nxn的卷积分成1xn和nx1两步计算，以3×3卷积为例：（GoogleNetV3中使用） 深度可分离卷积（Depthwise Separable Convolution）  它的核心思想是将一个完整的卷积运算分解为两步进行，分别为逐深度卷积Depthwise Convolution与逐点卷积Pointwise Convolution。
+原始的卷积操作与下图所示，其参数量为：$(KernelSize\times KernelSize\times c_{1})\times c_{2}$，假设输入层为一个大小为64×64的图片，输入通道为3，输出通道为4，卷积核大小为3×3，则其具体参数量为$3×3×3×4=108$。 深度可分离卷积的第一步是逐深度卷积，如下图所示，可以看出，就是将分组卷积中的组数设置为通道数，该卷积操作的输入和输出通道数相同，这一步只融合了空间信息，缺少对通道之间的信息交流；该步的参数量为：$(KernelSize\times KernelSize\times 1)\times c_{1}$，以上述例子为例，其具体参数量为$3×3×1×3=27$。 第二步就是逐点卷积，使通道之间的信息可以流通，如下图所示，用1×1的卷积组合不同深度卷积的输出，得到一组新的输出，通过1×1卷积的个数控制输出通道数；该步的参数量为$(1\times 1\times c_{1})\times c_{2}$，其具体参数量为$1×1×3×4=12$。 因此，深度可分离卷积的总参数量为$27+12=39$，差不多是原始卷积操作（108）的1/3。
+总结  分组卷积和可分离卷积都是可以用来减少参数量，通过这两种卷积可以对训练好的复杂模型进行压缩得到小模型，如ResNeXt，也可以直接设计小模型并进行训练，如MobileNet、ShuffleNet等。</description>
+    </item>
+    
+    <item>
+      <title>BatchNormalization</title>
+      <link>https://gdy0924.github.io/posts/batchnormalization/</link>
+      <pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/batchnormalization/</guid>
+      <description>批归一化主要用在非线性激活函数层前，它不仅可以加快模型训练时的收敛速度，而且还能够使模型训练过程更加稳定，避免梯度爆炸或者梯度消失，也起到一定的正则化作用，所以在目前的网络中被广泛使用到。
+计算步骤及公式 1、计算均值与方差 首先，对于输入的数值集合$ B= $ $\lbrace$ $ x_{1&amp;hellip;m} $ $\rbrace$，计算其均值$ \mu _{B} $和方差$ \sigma _{B}^{2} $，如下所示： $$ \mu _{B}=\frac{1}{m} \sum_{i=1}^{n} {x_i} $$
+$$ \sigma _{B}^{2} = \frac{1}{m} \sum_{i=1}^{m} (x_i- \mu _{B})^{2} $$
+2、数据标准化 将集合$ B $转化为均值为0、方差为1的正态分布$ \tilde{x_{i}} $，其中$ \epsilon $是引入的一个极小常数，以防止在公式中出现除零的情况 $$ \tilde{x_{i}}=\frac{x_{i}-\mu _{B}}{\sqrt{\sigma _{B}^{2}+\epsilon }} $$
+3、BN 引入可训练参数$ \gamma $和$ \beta $，对数据实现平移和缩放操作，通过引入的两个还原参数，可以使网络学习到原始的特征分布，在一定程度上保留了原始数据的分布 $$ y_{i}=\gamma \tilde{x_{i}}+\beta
+$$
+在全连接层中，BN作用在特征维上，而在卷积层中，BN作用在通道维上，具体来说，就是对feature map的通道方向求均值和方差，即假设batch size=n, feature map的shape= (w, h, c), 则会对c个$nwh $的特征分别求出c个均值和方差。
+预测阶段的BN 在训练阶段，可能没有许多的数据来形成一整个batch，可能只用单个数据来进行测试，这时，单个数据就无法计算上边公式中的均值与方差。 在训练阶段，针对每一个batch使用BN公式计算出的均值 $ \mu= $ $\lbrace$ $\mu ^{1},\mu ^{2},&amp;hellip;,\mu ^{n} $ $\rbrace$ 和 $ \sigma =$ $\lbrace$ $\sigma ^{1},\sigma ^{2},&amp;hellip;,\sigma ^{n} $ $\rbrace$ ，分别计算，其中$ p $是新引入的可调节参数。 $$ \bar{\mu }=p\bar{\mu }+\left ( 1-p \right )\mu ^{t} $$</description>
+    </item>
+    
+    <item>
+      <title>模型评价指标</title>
+      <link>https://gdy0924.github.io/posts/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/</link>
+      <pubDate>Sat, 11 Dec 2021 15:52:51 +0800</pubDate>
+      
+      <guid>https://gdy0924.github.io/posts/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/</guid>
+      <description>对于训练好的模型，我们通常更加关注该模型在未知数据上的性能“好坏”，也就是模型的泛化能力如何。要对模型的泛化性能进行评估，就需要有衡量模型泛化能力的评价标准，即评价指标，或者称为性能度量。针对两种不同的任务类型：分类任务和回归任务，有各自不同的评价指标。
+回归任务 回归任务简单来说就是对连续值进行预测，比如：面积大小、数量多少等，最常用的性能度量是平均绝对误差(MAE)和均方误差(MSE)。
+MAE 平均绝对误差就是计算预测值与真实值之间的距离，公式如下：
+$$ MAE=\frac{1}{n}\sum_{i=1}^{n}\left | y_{i}-\hat{y_{i}} \right | $$
+MSE 均方误差就是计算预测值与真实值之间距离的平方和，公式如下：
+$$ MSE=\frac{1}{n}\sum_{i=1}^{n}\left ( y_{i}-\hat{y_{i}} \right )^{2} $$
+分类任务 分类任务简单来说就是对离散值进行预测，比如是不是、属不属于、或者属于哪一类，最常用的性能度量是准确率、错误率、精确率、召回率和F1-score等。 在分类任务中，基础指标是混淆矩阵，在混淆矩阵的基础上可以产生精确率、召回率等不同的评价指标。
+混淆矩阵 当把数据集中的正负样本分开来看时，将会产生以下四个指标： TP(True Positive)：真正例，即该样本的真实标签为正类，预测也为正类 TN(True Negative)：真反例，即该样本的真实标签为负类，预测也为负类 FP(False Positive)：假正例，即该样本的真实标签为负类，但预测为正类 FN(False Negative)：假反例，即该样本的真实标签为正类，但预测为负类 将上述四个指标放在一个矩阵中，即可得到混淆矩阵。
+真实情况预测结果正例反例正例TPFN反例FPTN错误率(Error Rate) 即分类错误的样本数占样本总数的比例，公式如下：
+$$ ErrorRate=\frac{FN+FP}{TP+FN+FP+TN} $$
+准确率(Accuracy) 即分类正确的样本数占样本总数的比例，公式如下：
+$$ ACC=\frac{TP+TN}{TP+FN+FP+TN} $$
+精确率(Precision) 又称查准率，即被预测为正例的样本中真实标签为正例的比例，公式如下：
+$$ P=\frac{TP}{TP+FP} $$</description>
+    </item>
+    
+  </channel>
+</rss>

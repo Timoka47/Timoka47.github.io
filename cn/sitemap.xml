@@ -2,11 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://Timoka47.github.io/cn/posts/cait/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://Timoka47.github.io/cn/categories/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,11 +15,17 @@
                 href="https://Timoka47.github.io/cn/categories/"
                 />
   </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/deepnet/</loc>
+    <lastmod>2022-06-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/edgevit/</loc>
+    <lastmod>2022-06-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://Timoka47.github.io/cn/categories/paper/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Timoka47.github.io/cn/posts/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,7 +38,7 @@
                 />
   </url><url>
     <loc>https://Timoka47.github.io/cn/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -47,11 +50,188 @@
                 href="https://Timoka47.github.io/cn/"
                 />
   </url><url>
-    <loc>https://Timoka47.github.io/cn/categories/%E8%AF%97%E6%AD%8C/</loc>
-    <lastmod>2018-03-04T00:00:00+00:00</lastmod>
+    <loc>https://Timoka47.github.io/cn/posts/halonet/</loc>
+    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://Timoka47.github.io/cn/posts/cn/</loc>
-    <lastmod>2018-03-04T00:00:00+00:00</lastmod>
+    <loc>https://Timoka47.github.io/cn/posts/ceit/</loc>
+    <lastmod>2022-06-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/cait/</loc>
+    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/levit/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/coatnet/</loc>
+    <lastmod>2022-06-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/volo/</loc>
+    <lastmod>2022-06-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/early-convolutions-help-transformers-see-better/</loc>
+    <lastmod>2022-06-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/visual-transformers%E7%BB%BC%E8%BF%B0/</loc>
+    <lastmod>2022-06-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/t2t/</loc>
+    <lastmod>2022-06-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/tnt/</loc>
+    <lastmod>2022-06-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/flash/</loc>
+    <lastmod>2022-06-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/crossvit/</loc>
+    <lastmod>2022-05-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/longformer/</loc>
+    <lastmod>2022-05-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/pvt/</loc>
+    <lastmod>2022-05-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/transformer-xl/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/mae/</loc>
+    <lastmod>2022-05-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/reformer/</loc>
+    <lastmod>2022-05-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/deit/</loc>
+    <lastmod>2022-05-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/categories/summary/</loc>
+    <lastmod>2022-05-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/%E6%80%BB%E7%BB%93%E4%B8%80/</loc>
+    <lastmod>2022-05-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/categories/code/</loc>
+    <lastmod>2022-05-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/segformer/</loc>
+    <lastmod>2022-05-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/setrcode/</loc>
+    <lastmod>2022-05-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/setr/</loc>
+    <lastmod>2022-05-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/attention-u-net/</loc>
+    <lastmod>2022-05-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/deeplab%E7%B3%BB%E5%88%97code/</loc>
+    <lastmod>2022-05-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/deeplab%E7%B3%BB%E5%88%97/</loc>
+    <lastmod>2022-05-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/</loc>
+    <lastmod>2022-05-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/segnet/</loc>
+    <lastmod>2022-04-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/u-netcode/</loc>
+    <lastmod>2022-04-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/u-netu-net&#43;&#43;/</loc>
+    <lastmod>2022-04-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/upsampling/</loc>
+    <lastmod>2022-04-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/fcncode/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/fcn/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/transformer%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2022-04-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/vit/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/ssd/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/bert/</loc>
+    <lastmod>2022-04-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/yolo%E7%B3%BB%E5%88%97/</loc>
+    <lastmod>2022-04-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/r-cnn%E7%B3%BB%E5%88%97/</loc>
+    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/r-cnn%E7%B3%BB%E5%88%97%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/iounms/</loc>
+    <lastmod>2022-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/transformer/</loc>
+    <lastmod>2022-04-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/attentionself-attention/</loc>
+    <lastmod>2022-04-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/shufflenet/</loc>
+    <lastmod>2022-04-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/%E5%88%86%E7%BB%84%E5%8D%B7%E7%A7%AF%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF/</loc>
+    <lastmod>2022-04-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/resnet/</loc>
+    <lastmod>2022-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/googlenetcode/</loc>
+    <lastmod>2022-03-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/googlenetpaper/</loc>
+    <lastmod>2022-03-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/open-world-object-detector/</loc>
+    <lastmod>2022-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/vggcode/</loc>
+    <lastmod>2022-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/vggpaper/</loc>
+    <lastmod>2022-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/relevance-campaper/</loc>
+    <lastmod>2022-03-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/batchnormalization/</loc>
+    <lastmod>2022-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/alexnetcode/</loc>
+    <lastmod>2022-01-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/alexnetpaper/</loc>
+    <lastmod>2022-01-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/lenetcode/</loc>
+    <lastmod>2021-12-26T20:58:21+08:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/lenetpapar/</loc>
+    <lastmod>2021-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/</loc>
+    <lastmod>2021-12-11T15:52:51+08:00</lastmod>
+  </url><url>
+    <loc>https://Timoka47.github.io/cn/posts/test/</loc>
+    <lastmod>2021-12-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Timoka47.github.io/cn/tags/</loc>
     <xhtml:link
