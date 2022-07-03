@@ -6,40 +6,18 @@
     <description>Recent content in Posts on Timoka&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://Timoka47.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://Timoka47.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>https://Timoka47.github.io/posts/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      <title>PiDiNet</title>
+      <link>https://Timoka47.github.io/posts/pidinet/</link>
+      <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://Timoka47.github.io/posts/migrate-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/▾ images/logo.png should become
-▾ &amp;lt;root&amp;gt;/▾ static/▾ images/logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>https://Timoka47.github.io/posts/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://Timoka47.github.io/posts/goisforlovers/</guid>
-      <description>Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.
-This document is a brief primer on using Go templates.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Hugo</title>
-      <link>https://Timoka47.github.io/posts/hugoisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://Timoka47.github.io/posts/hugoisforlovers/</guid>
-      <description>Step 1. Install Hugo Go to Hugo releases and download the appropriate version for your OS and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at Install Hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+      <guid>https://Timoka47.github.io/posts/pidinet/</guid>
+      <description>PiDiNet：Pixel Difference Networks for Efficient Edge Detection 原文链接：PiDiNet
+Introduction 边缘的表现形式：直线、转角、“X”形交叉点 边缘检测的目标： 识别图像亮度变化，强度、颜色、纹理等的不连续 边缘检测的两大类算法 ：① 传统的边缘检测算子 ② 基于深度学习CNN的边缘检测方法 1. 传统方法（例如：Sobel, Prewitt, Laplacian of Gaussian (LoG), Canny），主要使用一阶或二阶导数信息，也可基于明显的像素差异设计内核结构，通过梯度信息计算。 基于深度学习的方法：主要使用图像梯度信息。 2. 基于CNN的方法，可以学习丰富的分层图像表示，其中普通CNN内核用作探测局部图像模式。然而，CNN核是从随机初始化的，它没有对梯度信息进行显式编码，这使得它们很难聚焦于边缘相关的特征。 基于CNN的实现边缘检测的缺点还包括：模型尺寸大、内存消耗大、计算成本高、运行效率低、吞吐量低、标签效率低，需要对大规模数据集进行模型预训练。
+🔴 本文的设计思路1：集成“传统的边缘检测算子+深度CNN卷积层” 过程：首先计算图像中的像素差异，然后与内核权重卷积，生成输出特征，即PDC像素差卷积。 优势：它可以通过传统的边缘检测算子很容易地捕捉到有利于边缘检测的图像梯度信息，而CNN模型可以更加集中地处理许多不相关的图像特征，减轻了负担。其次，深度CNN强大的学习能力仍然可以被保留下来，以提取有语义的表征，从而实现稳健而准确的边缘检测。
+🔴 本文的设计思路2：应用PDC，设计轻量型网络架构PiDiNet PiDiNet是由一个高效的主干结构和一个高效的特定任务侧结构组成的轻量型边缘检测网络，可以更好的权衡了功耗和效率之间的关系。
+   Feature Description Advantages     模型参数少 参数占用内存可降到K级别 节约内存资源   乘累加计算占用内存少 PiDiNet仅用个位数G内存，tiny版可降到M级 降低功耗   吞吐量高 tiny版PiDiNet可以达到上百的FPS 运行效率高   不需要进行预训练 - 不需要大量带标签数据训练     因为可用于训练边缘检测算法的有标注的数据集很少，所以一般的基于deep CNN的边缘检测网络通常使用训练好的backbone网络先进行预训练，这会耗费大量的内存和能量。（例如使用VGG16在ImageNet上训练）</description>
     </item>
     
   </channel>

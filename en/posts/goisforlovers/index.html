@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Hugo 0.89.4" />
+  <meta name="generator" content="Hugo 0.85.0" />
   <script type="text/javascript"
         async
         src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -44,9 +44,9 @@ code.has-jax {
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="Gao dy" />
-  <meta property="og:url" content="https://gdy0924.github.io/en/posts/goisforlovers/" />
-  <link rel="canonical" href="https://gdy0924.github.io/en/posts/goisforlovers/" /><link rel="alternate" type="application/atom+xml" href="https://gdy0924.github.io/index.xml" title="XY&#39;s Blog">
+  <meta name="author" content="Timoka 47" />
+  <meta property="og:url" content="https://Timoka47.github.io/en/posts/goisforlovers/" />
+  <link rel="canonical" href="https://Timoka47.github.io/en/posts/goisforlovers/" /><link rel="alternate" type="application/atom+xml" href="https://Timoka47.github.ioindex.xml" title="Timoka&#39;s Blog">
 
   <script type="application/ld+json">
   {
@@ -54,22 +54,22 @@ code.has-jax {
       "@type" : "BlogPosting",
       "mainEntityOfPage": {
            "@type": "WebPage",
-           "@id": "https:\/\/gdy0924.github.io\/"
+           "@id": "https:\/\/Timoka47.github.io"
       },
       "articleSection" : "posts",
       "name" : "(Hu)go Template Primer",
       "headline" : "(Hu)go Template Primer",
       "description" : "Hugo uses the excellent Go html\/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.\nThis document is a brief primer on using Go templates.",
       "inLanguage" : "en-US",
-      "author" : "Gao dy",
-      "creator" : "Gao dy",
-      "publisher": "Gao dy",
-      "accountablePerson" : "Gao dy",
-      "copyrightHolder" : "Gao dy",
+      "author" : "Timoka 47",
+      "creator" : "Timoka 47",
+      "publisher": "Timoka 47",
+      "accountablePerson" : "Timoka 47",
+      "copyrightHolder" : "Timoka 47",
       "copyrightYear" : "2014",
       "datePublished": "2014-04-02 00:00:00 \u002b0000 UTC",
       "dateModified" : "2014-04-02 00:00:00 \u002b0000 UTC",
-      "url" : "https:\/\/gdy0924.github.io\/en\/posts\/goisforlovers\/",
+      "url" : "https:\/\/Timoka47.github.io\/en\/posts\/goisforlovers\/",
       "keywords" : [ "go","golang","templates","themes","development", ]
   }
 </script>
@@ -92,7 +92,7 @@ This document is a brief primer on using Go templates." />
   
 
   <link href="/index.xml" rel="alternate" type="application/rss+xml"
-    title="XY&#39;s Blog">
+    title="Timoka&#39;s Blog">
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
@@ -113,7 +113,7 @@ This document is a brief primer on using Go templates." />
 <header>
   <div class="header-title">
     <a href="/en/"
-      >Gao dy</a
+      >Timoka 47</a
     >
   </div>
   <div class="header-subtitle"></div>
@@ -125,16 +125,16 @@ This document is a brief primer on using Go templates." />
   </div>
   
   <div class="header-item">
-    <a href="https://github.com/gdy0924" target="_blank">About</a>
+    <a href="https://Timoka47.github.io" target="_blank">About</a>
   </div>
   
 </div>
 <div class="row end-xs">
-   
+  
   <div class="lang-switch col-xs-3 col-xs-offset-9">
     <a href="/cn/">Chinese</a>
   </div>
-   
+    
 </div>
 <div class="header-line"></div>
 
@@ -153,7 +153,7 @@ This document is a brief primer on using Go templates." />
             <div class="col-xs-6">
               
               <div class="post-author">
-                <a target="_blank" href="https://gdy0924.github.io/">@Gao dy</a>
+                <a target="_blank" href="https://Timoka47.github.io/">@Timoka 47</a>
               </div>
               
             </div>
@@ -348,16 +348,16 @@ benefit from having the table of contents provided. Sometimes the TOC just
 doesn&rsquo;t make a lot of sense. We&rsquo;ve defined a variable in our front matter
 of some pages to turn off the TOC from being displayed.</p>
 <p>Here is the example front matter:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>---
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>title: &#34;Permalinks&#34;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>date: &#34;2013-11-18&#34;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>aliases:
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>  - &#34;/doc/permalinks/&#34;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span>groups: [&#34;extras&#34;]
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span>groups_weight: 30
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span>notoc: true
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span>---
-</code></pre></div><p>Here is the corresponding code inside of the template:</p>
+<pre><code>---
+title: &quot;Permalinks&quot;
+date: &quot;2013-11-18&quot;
+aliases:
+  - &quot;/doc/permalinks/&quot;
+groups: [&quot;extras&quot;]
+groups_weight: 30
+notoc: true
+---
+</code></pre><p>Here is the corresponding code inside of the template:</p>
 <pre><code>  {{ if not .Params.notoc }}
     &lt;div id=&quot;toc&quot; class=&quot;well col-md-4 col-sm-6&quot;&gt;
     {{ .TableOfContents }}
@@ -368,35 +368,35 @@ of some pages to turn off the TOC from being displayed.</p>
 <p>In your top-level configuration file (eg, <code>config.yaml</code>) you can define site
 parameters, which are values which will be available to you in chrome.</p>
 <p>For instance, you might declare:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#000080">params</span>:<span style="color:#bbb">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#bbb">  </span><span style="color:#000080">CopyrightHTML</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;Copyright &amp;#xA9; 2013 John Doe. All Rights Reserved.&#34;</span><span style="color:#bbb">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#bbb">  </span><span style="color:#000080">TwitterUser</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;spf13&#34;</span><span style="color:#bbb">
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#bbb">  </span><span style="color:#000080">SidebarRecentLimit</span>:<span style="color:#bbb"> </span><span style="color:#099">5</span><span style="color:#bbb">
-</span></code></pre></div><p>Within a footer layout, you might then declare a <code>&lt;footer&gt;</code> which is only
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">params</span>:
+  <span style="color:#f92672">CopyrightHTML</span>: <span style="color:#e6db74">&#34;Copyright &amp;#xA9; 2013 John Doe. All Rights Reserved.&#34;</span>
+  <span style="color:#f92672">TwitterUser</span>: <span style="color:#e6db74">&#34;spf13&#34;</span>
+  <span style="color:#f92672">SidebarRecentLimit</span>: <span style="color:#ae81ff">5</span>
+</code></pre></div><p>Within a footer layout, you might then declare a <code>&lt;footer&gt;</code> which is only
 provided if the <code>CopyrightHTML</code> parameter is provided, and if it is given,
 you would declare it to be HTML-safe, so that the HTML entity is not escaped
 again.  This would let you easily update just your top-level config file each
 January 1st, instead of hunting through your templates.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>{{if .Site.Params.CopyrightHTML}}&lt;footer&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>&lt;div class=&#34;text-center&#34;&gt;{{.Site.Params.CopyrightHTML | safeHtml}}&lt;/div&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>&lt;/footer&gt;{{end}}
-</code></pre></div><p>An alternative way of writing the &ldquo;if&rdquo; and then referencing the same value
+<pre><code>{{if .Site.Params.CopyrightHTML}}&lt;footer&gt;
+&lt;div class=&quot;text-center&quot;&gt;{{.Site.Params.CopyrightHTML | safeHtml}}&lt;/div&gt;
+&lt;/footer&gt;{{end}}
+</code></pre><p>An alternative way of writing the &ldquo;if&rdquo; and then referencing the same value
 is to use &ldquo;with&rdquo; instead. With rebinds the context <code>.</code> within its scope,
 and skips the block if the variable is absent:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>{{with .Site.Params.TwitterUser}}&lt;span class=&#34;twitter&#34;&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>&lt;a href=&#34;https://twitter.com/{{.}}&#34; rel=&#34;author&#34;&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>&lt;img src=&#34;/images/twitter.png&#34; width=&#34;48&#34; height=&#34;48&#34; title=&#34;Twitter: {{.}}&#34;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span> alt=&#34;Twitter&#34;&gt;&lt;/a&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>&lt;/span&gt;{{end}}
-</code></pre></div><p>Finally, if you want to pull &ldquo;magic constants&rdquo; out of your layouts, you can do
+<pre><code>{{with .Site.Params.TwitterUser}}&lt;span class=&quot;twitter&quot;&gt;
+&lt;a href=&quot;https://twitter.com/{{.}}&quot; rel=&quot;author&quot;&gt;
+&lt;img src=&quot;/images/twitter.png&quot; width=&quot;48&quot; height=&quot;48&quot; title=&quot;Twitter: {{.}}&quot;
+ alt=&quot;Twitter&quot;&gt;&lt;/a&gt;
+&lt;/span&gt;{{end}}
+</code></pre><p>Finally, if you want to pull &ldquo;magic constants&rdquo; out of your layouts, you can do
 so, such as in this example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>&lt;nav class=&#34;recent&#34;&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>  &lt;h1&gt;Recent Posts&lt;/h1&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>  &lt;ul&gt;{{range first .Site.Params.SidebarRecentLimit .Site.Recent}}
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>    &lt;li&gt;&lt;a href=&#34;{{.RelPermalink}}&#34;&gt;{{.Title}}&lt;/a&gt;&lt;/li&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>  {{end}}&lt;/ul&gt;
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span>&lt;/nav&gt;
-</code></pre></div>
+<pre><code>&lt;nav class=&quot;recent&quot;&gt;
+  &lt;h1&gt;Recent Posts&lt;/h1&gt;
+  &lt;ul&gt;{{range first .Site.Params.SidebarRecentLimit .Site.Recent}}
+    &lt;li&gt;&lt;a href=&quot;{{.RelPermalink}}&quot;&gt;{{.Title}}&lt;/a&gt;&lt;/li&gt;
+  {{end}}&lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
         </div>
 
         <div class="row middle-xs">
